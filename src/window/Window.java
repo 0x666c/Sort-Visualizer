@@ -1,6 +1,5 @@
 package window;
 
-import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -11,11 +10,14 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import input.Input;
 import sorts.Sorts;
 import sorts.Sorts.ISort;
+import sound.Oscillator;
 
 public class Window {
 	public static void main(String[] args) {Window.init(); Window.entry();}
@@ -134,12 +136,16 @@ public class Window {
 				STATUS_X, STATUS_Y);
 	}
 	
+	private static boolean fin = false;
 	private static void tick() {
 		if(sorting) {
 			if(currentSort.sortOneIteration(tosort)) {
-				settingsPane.finishedCallback();
+				//settingsPane.finishedCallback();
 			}
-			
+			int[] arr = currentSort.getCurrentComparing();
+			for (int i : arr) {
+				Oscillator.beep(2, tosort[Math.max(1, i)-1]);
+			}
 		}
 	}
 	

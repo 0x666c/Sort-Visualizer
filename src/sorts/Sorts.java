@@ -71,7 +71,7 @@ public abstract class Sorts {
 	
 	private static class InsertionSort implements ISort {
 		
-		private int j = 1, i, key;
+		private int j = 1, i = 0, key = 0;
 		boolean whilee = true;
 		
 		private long aa = 0, cmp = 0;
@@ -118,6 +118,8 @@ public abstract class Sorts {
 			return this.getClass().getSimpleName();
 		}
 		public int[] getCurrentComparing() {
+			System.out.println("j - "+j);
+			System.out.println("i - "+i);
 			return new int[] {j, i};
 		}
 	}
